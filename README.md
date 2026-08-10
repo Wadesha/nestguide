@@ -1,8 +1,10 @@
 # 初生宝典 (NestGuide)
 
+> 在线体验: https://wadesha.github.io/nestguide/
+
 > 从"完全不懂"到"从容应对"——新手父母的一站式孕期到新生儿引导工具
 
-[查看 PRD](PRD.md)
+[查看 PRD](PRD.md)  ·  [在线体验](https://wadesha.github.io/nestguide/)
 
 ---
 

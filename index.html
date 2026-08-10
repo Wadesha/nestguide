@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初生宝典 NestGuide - 新手父母的一站式引导工具</title>
+<style>
+  :root {
+    --rose: #E8A0B4;
+    --rose-light: #FDF2F5;
+    --rose-dark: #C4708A;
+    --sage: #B5C9B7;
+    --sage-light: #F0F5F0;
+    --cream: #FFFBF5;
+    --warm-gray: #F5F0EB;
+    --text: #3D2C2E;
+    --text-light: #7A6A6C;
+    --white: #FFFFFF;
+    --shadow: 0 2px 12px rgba(61,44,46,0.08);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Header ─── */
+  header {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--sage) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 20px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  header h1 small {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.85;
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 4px;
+  }
+  header p {
+    margin-top: 16px;
+    font-size: 1.15rem;
+    opacity: 0.92;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 0.85rem;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  /* ─── Container ─── */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ─── Section ─── */
+  section {
+    padding: 50px 0;
+  }
+  section h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  section .subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+
+  /* ─── Demo Card (今日待办) ─── */
+  .demo-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .demo-card-header {
+    background: linear-gradient(135deg, var(--rose-light), var(--sage-light));
+    padding: 24px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .demo-card-header .date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .demo-card-header .greeting {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .demo-card-header .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .demo-card-header .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .demo-card-header .progress-bar .fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--sage));
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .demo-card-header .progress-text {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  .task-list {
+    padding: 8px 0;
+  }
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: var(--sage-light); }
+  .task-item.done { opacity: 0.55; }
+  .task-item.done .task-text { text-decoration: line-through; }
+
+  .task-check {
+    width: 22px; height: 22px;
+    border: 2px solid var(--rose);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 13px;
+    color: transparent;
+  }
+  .task-item.done .task-check {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: var(--white);
+  }
+
+  .task-content { flex: 1; min-width: 0; }
+  .task-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .task-desc {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+  .task-tag {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background: var(--rose-light);
+    color: var(--rose-dark);
+    margin-top: 3px;
+  }
+  .task-tag.urgent { background: #FDE8E8; color: #C0392B; }
+  .task-tag.baby { background: #E8F4FD; color: #2C7BB6; }
+  .task-tag.mom { background: #FDF2F5; color: var(--rose-dark); }
+
+  /* ─── Features Grid ─── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .feature-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-3px); }
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 1.4rem;
+  }
+  .feature-icon.prep { background: #FDF2F5; }
+  .feature-icon.birth { background: #F0F5F0; }
+  .feature-icon.post { background: #FFF8E8; }
+  .feature-icon.baby { background: #E8F4FD; }
+  .feature-card h3 { font-size: 0.95rem; margin-bottom: 6px; }
+  .feature-card p { font-size: 0.8rem; color: var(--text-light); }
+
+  /* ─── Stage Timeline ─── */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 24px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--rose), var(--sage));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--rose);
+    border: 3px solid var(--cream);
+  }
+  .timeline-item:nth-child(2)::before { background: var(--sage); }
+  .timeline-item:nth-child(3)::before { background: var(--rose-dark); }
+  .timeline-item h4 { font-size: 0.95rem; }
+  .timeline-item p { font-size: 0.85rem; color: var(--text-light); }
+
+  /* ─── CTA ─── */
+  .cta {
+    background: linear-gradient(135deg, var(--rose), var(--sage));
+    color: var(--white);
+    text-align: center;
+    padding: 50px 20px;
+    border-radius: var(--radius);
+    margin: 20px 0 50px;
+  }
+  .cta h2 { color: var(--white); font-size: 1.5rem; }
+  .cta p { opacity: 0.9; margin: 10px 0 20px; font-size: 0.95rem; }
+  .cta .btn {
+    display: inline-block;
+    background: var(--white);
+    color: var(--rose-dark);
+    padding: 12px 32px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .cta .btn:hover { transform: scale(1.05); }
+
+  /* ─── Footer ─── */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  footer a { color: var(--rose-dark); text-decoration: none; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 480px) {
+    header h1 { font-size: 2rem; }
+    .task-item { padding: 12px 18px; }
+    .demo-card-header { padding: 18px 20px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>初生宝典<small>NestGuide</small></h1>
+  <p>从"完全不懂"到"从容应对"<br>新手父母的一站式孕期 → 新生儿引导工具</p>
+  <span class="header-badge"> 零基础 · 每日引导 · 全程陪伴</span>
+</header>
+
+<div class="container">
+
+  <!-- ─── 今日待办 Demo ─── -->
+  <section>
+    <h2> 打开 App，就是今天该做的事</h2>
+    <p class="subtitle">不需要任何教程，跟着勾选就行。试试看 ⬇️</p>
+
+    <div class="demo-card" id="app-demo">
+      <div class="demo-card-header">
+        <div class="date" id="today-date"></div>
+        <div class="greeting"> 今天需要完成</div>
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="fill" id="progress-fill"></div>
+          </div>
+          <span class="progress-text" id="progress-text">0 / 0</span>
+        </div>
+      </div>
+      <div class="task-list" id="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ─── 功能模块 ─── -->
+  <section>
+    <h2> 六大核心模块</h2>
+    <p class="subtitle">按阶段自动解锁，只给当前需要的</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon prep"> </div>
+        <h3>产前准备</h3>
+        <p>待产包清单 · 产检提醒 · 宫缩计时 · 入院决策</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon birth"> </div>
+        <h3>分娩指南</h3>
+        <p>产程引导 · 呼吸法 · 陪产人指南 · 剖腹产流程</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon post"> </div>
+        <h3>产后恢复</h3>
+        <p>每日恢复日志 · 伤口护理 · 心理自评 · 恶露追踪</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon baby"> </div>
+        <h3>新生儿护理</h3>
+        <p>喂养记录 · 睡眠追踪 · 黄疸监测 · 疫苗时间表</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 用户旅程 ─── -->
+  <section>
+    <h2> 您的专属旅程</h2>
+    <p class="subtitle">从孕晚期到产后，每一步都有人牵着您</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4> 孕晚期（28-40 周）</h4>
+        <p>每周任务推送 → 准备待产包 → 产检提醒 → 学习分娩知识</p>
+      </div>
+      <div class="timeline-item">
+        <h4> 分娩期</h4>
+        <p>产兆判断 → 入院决策 → 产程实时引导 → 陪产人配合</p>
+      </div>
+      <div class="timeline-item">
+        <h4> 产后（0-3 个月）</h4>
+        <p>妈妈恢复跟踪 → 宝宝护理记录 → 疫苗提醒 → 成长曲线</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 核心理念 ─── -->
+  <section>
+    <h2> 设计理念</h2>
+    <p class="subtitle">我们不是又一个母婴 App，而是一个有温度的向导</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
+        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
+        <h4 style="font-size:0.9rem;margin-bottom:4px">零学习成本</h4>
+        <p style="font-size:0.8rem;color:var(--text-light)">打开就是"今日待办"，无需教程</p>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
+        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
+        <h4 style="font-size:0.9rem;margin-bottom:4px">按阶段解锁</h4>
+        <p style="font-size:0.8rem;color:var(--text-light)">只展示当前需要的，不制造焦虑</p>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
+        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
+        <h4 style="font-size:0.9rem;margin-bottom:4px">有温度的设计</h4>
+        <p style="font-size:0.8rem;color:var(--text-light)">每个任务都告诉你"为什么"和"怎么做"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <div class="cta">
+    <h2> 正在开发中，敬请期待</h2>
+    <p>如果您有想法或建议，欢迎在 GitHub 上提交 Issue</p>
+    <a class="btn" href="https://github.com/Wadesha/nestguide"> 前往 GitHub</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="https://github.com/Wadesha/nestguide">初生宝典 NestGuide</a> · 产品概念展示 · 仅供参考，不构成医疗建议</p>
+</footer>
+
+<script>
+  (function() {
+    // ─── 日期显示 ───
+    const now = new Date();
+    const weekdays = ['日','一','二','三','四','五','六'];
+    const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 星期${weekdays[now.getDay()]}`;
+    document.getElementById('today-date').textContent = '  ' + dateStr;
+
+    // ─── 任务数据 ───
+    const tasks = [
+      { id: 't1', text: '清点待产包', desc: '检查妈妈篇 + 宝宝篇 + 证件篇是否齐全', tag: ' 产前', tagClass: '' },
+      { id: 't2', text: '确认分娩医院路线', desc: '规划好去医院的路线，提前踩点', tag: ' 重要', tagClass: 'urgent' },
+      { id: 't3', text: '学习拉玛泽呼吸法', desc: '每天练习 10 分钟，产时用得上', tag: ' 妈妈', tagClass: 'mom' },
+      { id: 't4', text: '宝宝衣物清洗消毒', desc: '新衣服用婴儿专用洗衣液清洗，晾晒', tag: ' 宝宝', tagClass: 'baby' },
+      { id: 't5', text: '记录今天胎动', desc: '早中晚各数一次，每次 1 小时', tag: ' 妈妈', tagClass: 'mom' },
+    ];
+
+    const taskListEl = document.getElementById('task-list');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+
+    function render() {
+      taskListEl.innerHTML = '';
+      let doneCount = 0;
+      tasks.forEach(t => {
+        const done = localStorage.getItem('nestguide_' + t.id) === 'true';
+        if (done) doneCount++;
+        const div = document.createElement('div');
+        div.className = 'task-item' + (done ? ' done' : '');
+        div.innerHTML = `
+          <div class="task-check">${done ? '✓' : ''}</div>
+          <div class="task-content">
+            <div class="task-text">${t.text}</div>
+            <div class="task-desc">${t.desc}</div>
+          </div>
+          <span class="task-tag ${t.tagClass}">${t.tag}</span>
+        `;
+        div.addEventListener('click', () => {
+          const key = 'nestguide_' + t.id;
+          const nowDone = localStorage.getItem(key) === 'true';
+          localStorage.setItem(key, nowDone ? 'false' : 'true');
+          render();
+        });
+        taskListEl.appendChild(div);
+      });
+      const total = tasks.length;
+      progressFill.style.width = total > 0 ? (doneCount / total * 100) + '%' : '0%';
+      progressText.textContent = `${doneCount} / ${total}`;
+    }
+
+    render();
+  })();
+</script>
+</body>
+</html>
