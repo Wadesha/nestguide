@@ -90,6 +90,7 @@
   .task-group { margin-bottom: 24px; }
   .task-group-header {
     display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    cursor: pointer; user-select: none;
   }
   .task-group-header .week-label { font-size: 1rem; font-weight: 700; }
   .task-group-header .week-status {
@@ -99,6 +100,14 @@
   .task-group-header .week-status.current { background: #FDF2F5; color: var(--rose-dark); font-weight: 600; }
   .task-group-header .week-progress { margin-left: auto; font-size: 0.8rem; color: var(--text-light); }
   .task-group-header .week-icon { font-size: 1.1rem; }
+  .task-group-header .collapse-arrow {
+    font-size: 0.7rem; color: var(--text-light); transition: transform 0.2s;
+    margin-left: 4px;
+  }
+  .task-group-header .collapse-arrow.collapsed { transform: rotate(-90deg); }
+  .task-card.collapsed { display: none; }
+  .task-group.collapsible .task-group-header { opacity: 0.7; }
+  .task-group.collapsible .task-group-header:hover { opacity: 1; }
 
   .task-card {
     background: var(--white); border-radius: var(--radius-sm);
@@ -756,6 +765,7 @@
       const current = isCurrentWeek(week, info.currentWeek);
       let statusClass = '';
       let statusText = '';
+      let isFarFuture = false;
       if (info.currentWeek !== null) {
         if (week < info.currentWeek) {
           statusText = '✅ 已完成';
@@ -766,30 +776,50 @@
           statusText = ' 即将到来';
         } else {
           statusText = ' 未来任务';
+          isFarFuture = true;
         }
       }
 
+      // 折叠逻辑：非展开全部模式且是未来任务（距当前>2周）
+      const collapseKey = 'collapse_' + week;
+      let isCollapsed = false;
+      if (!showAll && isFarFuture) {
+        isCollapsed = localStorage.getItem(collapseKey) !== 'false';
+      }
+
       html += `
-        <div class="task-group">
-          <div class="task-group-header">
+        <div class="task-group${isFarFuture ? ' collapsible' : ''}" data-week="${week}">
+          <div class="task-group-header" data-toggle="${week}">
             <span class="week-icon">${current ? '  ' : ''}</span>
             <span class="week-label">${weekLabel(week)}</span>
             <span class="week-status ${statusClass}">${statusText}</span>
+            <span class="collapse-arrow${isCollapsed ? ' collapsed' : ''}">▼</span>
             <span class="week-progress">${doneInWeek}/${tasks.length}</span>
           </div>
-          <div class="task-card">${taskHtml}</div>
+          <div class="task-card${isCollapsed ? ' collapsed' : ''}">${taskHtml}</div>
         </div>
       `;
     });
 
     taskContainer.innerHTML = html;
 
-    // 绑定点击事件
+    // 绑定任务点击事件
     document.querySelectorAll('.task-item').forEach(el => {
       el.addEventListener('click', function() {
         const key = this.dataset.key;
         const done = localStorage.getItem(key) === 'true';
         localStorage.setItem(key, done ? 'false' : 'true');
+        render();
+      });
+    });
+
+    // 绑定折叠展开事件
+    document.querySelectorAll('.task-group-header[data-toggle]').forEach(el => {
+      el.addEventListener('click', function() {
+        const week = this.dataset.toggle;
+        const collapseKey = 'collapse_' + week;
+        const current = localStorage.getItem(collapseKey) !== 'false';
+        localStorage.setItem(collapseKey, current ? 'false' : 'true');
         render();
       });
     });
