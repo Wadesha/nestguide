@@ -158,7 +158,7 @@
 
 <header>
   <h1>初生宝典<small>NestGuide</small></h1>
-  <p>设置预产期，自动生成从孕晚期到产后 3 个月的完整待办清单</p>
+  <p>设置预产期，自动生成从孕晚期到产后 3 个月的完整待办清单<br><span style="font-size:0.85rem;opacity:0.8"> 涵盖 300 项任务 · 含新生儿护理/产后恢复/疫苗接种</span></p>
 </header>
 
 <div class="container">
@@ -172,6 +172,7 @@
         </div>
         <button class="btn" id="set-date-btn"> 开始规划</button>
         <button class="btn-outline" id="reset-btn">重置</button>
+        <button class="btn-outline" id="showall-btn" style="border-color:var(--sage);color:var(--sage-dark)"> 展开全部</button>
       </div>
       <div class="stage-banner" id="stage-banner" style="display:none">
         <div>
@@ -201,7 +202,7 @@
       <div class="icon"> </div>
       <h3>请设置您的预产期</h3>
       <p>选择日期后，系统会根据您当前所处的阶段<br>展示从孕 28 周到产后 12 周的完整待办清单</p>
-      <p style="margin-top:12px;font-size:0.8rem;color:var(--rose-dark)"> 每周 4-6 项任务，轻松跟上节奏</p>
+      <p style="margin-top:12px;font-size:0.8rem;color:var(--rose-dark)"> 每周 4-6 项任务，轻松跟上节奏 · 点击「展开全部」可预览所有阶段</p>
     </div>
   </section>
 
@@ -582,6 +583,10 @@
   const taskSection = document.getElementById('task-section');
   const taskContainer = document.getElementById('task-container');
   const emptySection = document.getElementById('empty-section');
+  const showallBtn = document.getElementById('showall-btn');
+
+  // ─── 展开全部状态 ───
+  let showAll = false;
 
   // ─── 工具函数 ───
   function weeksBetween(d1, d2) {
@@ -691,18 +696,22 @@
 
     // 计算统计数据
     const allVisibleTasks = TASK_DB.filter(t => info.allWeeks.includes(t.week));
-    // 只显示当前周及之前已完成的任务，加上未来所有任务
-    const displayTasks = allVisibleTasks.filter(t => {
-      if (info.currentWeek === null) return true;
-      return t.week <= info.currentWeek;
-    });
-    // 但也要显示未来2周的任务（给用户预览）
-    const previewTasks = allVisibleTasks.filter(t => {
-      if (info.currentWeek === null) return false;
-      return t.week > info.currentWeek && t.week <= info.currentWeek + 2;
-    });
-
-    const visibleTasks = [...displayTasks, ...previewTasks];
+    // 显示逻辑：展开全部模式 vs 按阶段显示
+    let visibleTasks;
+    if (showAll) {
+      visibleTasks = allVisibleTasks;
+    } else {
+      // 只显示当前周及之前已完成的任务，加上未来2周预览
+      const displayTasks = allVisibleTasks.filter(t => {
+        if (info.currentWeek === null) return true;
+        return t.week <= info.currentWeek;
+      });
+      const previewTasks = allVisibleTasks.filter(t => {
+        if (info.currentWeek === null) return false;
+        return t.week > info.currentWeek && t.week <= info.currentWeek + 2;
+      });
+      visibleTasks = [...displayTasks, ...previewTasks];
+    }
 
     const totalCount = allVisibleTasks.length;
     let doneCount = 0;
@@ -799,6 +808,22 @@
     localStorage.removeItem('nestguide_due_date');
     const keys = Object.keys(localStorage);
     keys.forEach(k => { if (k.startsWith('task_')) localStorage.removeItem(k); });
+    showAll = false;
+    render();
+  });
+
+  showallBtn.addEventListener('click', () => {
+    showAll = !showAll;
+    showallBtn.textContent = showAll ? ' 按阶段显示' : ' 展开全部';
+    if (showAll) {
+      showallBtn.style.borderColor = 'var(--rose)';
+      showallBtn.style.color = 'var(--rose-dark)';
+      showallBtn.style.background = 'var(--rose-light)';
+    } else {
+      showallBtn.style.borderColor = 'var(--sage)';
+      showallBtn.style.color = 'var(--sage-dark)';
+      showallBtn.style.background = 'transparent';
+    }
     render();
   });
 
