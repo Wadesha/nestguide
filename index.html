@@ -3,318 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>初生宝典 NestGuide - 新手父母的一站式引导工具</title>
+<title>初生宝典 NestGuide - 新手父母引导工具</title>
 <style>
   :root {
-    --rose: #E8A0B4;
-    --rose-light: #FDF2F5;
-    --rose-dark: #C4708A;
-    --sage: #B5C9B7;
-    --sage-light: #F0F5F0;
-    --cream: #FFFBF5;
-    --warm-gray: #F5F0EB;
-    --text: #3D2C2E;
-    --text-light: #7A6A6C;
-    --white: #FFFFFF;
-    --shadow: 0 2px 12px rgba(61,44,46,0.08);
-    --radius: 16px;
+    --rose: #E8A0B4; --rose-light: #FDF2F5; --rose-dark: #C4708A;
+    --sage: #B5C9B7; --sage-light: #F0F5F0; --sage-dark: #8DAF90;
+    --cream: #FFFBF5; --text: #3D2C2E; --text-light: #7A6A6C;
+    --white: #FFFFFF; --shadow: 0 2px 12px rgba(61,44,46,0.08);
+    --radius: 16px; --radius-sm: 10px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    line-height: 1.6;
+    background: var(--cream); color: var(--text); line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   /* ─── Header ─── */
   header {
     background: linear-gradient(135deg, var(--rose) 0%, var(--sage) 100%);
-    color: var(--white);
-    text-align: center;
-    padding: 60px 20px 50px;
-    position: relative;
-    overflow: hidden;
+    color: var(--white); text-align: center; padding: 48px 20px 36px;
+    position: relative; overflow: hidden;
   }
   header::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
+    content: ''; position: absolute; top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
     pointer-events: none;
   }
-  header h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    position: relative;
-  }
-  header h1 small {
-    font-size: 1rem;
-    font-weight: 400;
-    opacity: 0.85;
-    display: block;
-    margin-top: 8px;
-    letter-spacing: 4px;
-  }
-  header p {
-    margin-top: 16px;
-    font-size: 1.15rem;
-    opacity: 0.92;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-  }
-  .header-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(4px);
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 0.85rem;
-    margin-top: 20px;
-    position: relative;
-  }
+  header h1 { font-size: 2.2rem; font-weight: 700; position: relative; }
+  header h1 small { font-size: 0.85rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 4px; }
+  header p { margin-top: 12px; font-size: 1rem; opacity: 0.9; position: relative; }
 
   /* ─── Container ─── */
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px;
+  .container { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 36px 0; }
+
+  /* ─── Due Date Picker ─── */
+  .due-date-section {
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
+  }
+  .due-date-card {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(61,44,46,0.12);
+    padding: 24px 28px;
+  }
+  .due-date-row {
+    display: flex; align-items: flex-end; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .due-date-row label {
+    font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 6px;
+  }
+  .due-date-row input[type="date"] {
+    padding: 10px 14px; border: 2px solid #E8E0DC; border-radius: var(--radius-sm);
+    font-size: 1rem; outline: none; transition: border-color 0.2s;
+    background: var(--cream); min-width: 180px;
+  }
+  .due-date-row input[type="date"]:focus { border-color: var(--rose); }
+  .due-date-row .btn {
+    padding: 10px 28px; border: none; border-radius: 24px;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    background: linear-gradient(135deg, var(--rose), var(--sage));
+    color: var(--white); transition: transform 0.2s; white-space: nowrap;
+  }
+  .due-date-row .btn:hover { transform: scale(1.03); }
+  .due-date-row .btn-outline {
+    background: transparent; border: 2px solid var(--rose); color: var(--rose-dark);
+    padding: 8px 20px; border-radius: 24px; font-size: 0.85rem;
+    cursor: pointer; transition: all 0.2s; margin-left: 8px;
+  }
+  .due-date-row .btn-outline:hover { background: var(--rose-light); }
+
+  /* ─── Stage Banner ─── */
+  .stage-banner {
+    margin-top: 18px;
+    background: linear-gradient(135deg, var(--rose-light), var(--sage-light));
+    border-radius: var(--radius-sm); padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .stage-banner .stage-name {
+    font-size: 1.1rem; font-weight: 700;
+  }
+  .stage-banner .stage-detail {
+    font-size: 0.85rem; color: var(--text-light);
+  }
+  .stage-banner .stage-progress {
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--rose-dark);
   }
 
-  /* ─── Section ─── */
-  section {
-    padding: 50px 0;
-  }
-  section h2 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-  section .subtitle {
-    color: var(--text-light);
-    font-size: 0.95rem;
+  /* ─── Task Groups ─── */
+  .task-group {
     margin-bottom: 28px;
   }
-
-  /* ─── Demo Card (今日待办) ─── */
-  .demo-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+  .task-group-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
   }
-  .demo-card-header {
-    background: linear-gradient(135deg, var(--rose-light), var(--sage-light));
-    padding: 24px 28px;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+  .task-group-header .week-label {
+    font-size: 1.05rem; font-weight: 700;
   }
-  .demo-card-header .date {
-    font-size: 0.85rem;
-    color: var(--text-light);
+  .task-group-header .week-sub {
+    font-size: 0.8rem; color: var(--text-light);
   }
-  .demo-card-header .greeting {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 4px;
-  }
-  .demo-card-header .progress-wrap {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 14px;
-  }
-  .demo-card-header .progress-bar {
-    flex: 1;
-    height: 6px;
-    background: rgba(0,0,0,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .demo-card-header .progress-bar .fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--rose), var(--sage));
-    transition: width 0.5s ease;
-    width: 0%;
-  }
-  .demo-card-header .progress-text {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    white-space: nowrap;
+  .task-group-header .week-progress {
+    margin-left: auto;
+    font-size: 0.8rem; color: var(--text-light);
+    background: var(--sage-light); padding: 2px 12px;
+    border-radius: 10px;
   }
 
-  .task-list {
-    padding: 8px 0;
+  .task-card {
+    background: var(--white); border-radius: var(--radius-sm);
+    box-shadow: var(--shadow); overflow: hidden;
+    margin-bottom: 8px;
   }
   .task-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 28px;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-    transition: background 0.2s;
-    cursor: pointer;
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 20px; cursor: pointer;
+    transition: background 0.15s; border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .task-item:last-child { border-bottom: none; }
   .task-item:hover { background: var(--sage-light); }
-  .task-item.done { opacity: 0.55; }
+  .task-item.done { opacity: 0.5; }
   .task-item.done .task-text { text-decoration: line-through; }
 
   .task-check {
-    width: 22px; height: 22px;
-    border: 2px solid var(--rose);
-    border-radius: 6px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    font-size: 13px;
-    color: transparent;
+    width: 22px; height: 22px; border: 2px solid var(--rose);
+    border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; font-size: 13px; color: transparent;
   }
   .task-item.done .task-check {
-    background: var(--rose);
-    border-color: var(--rose);
-    color: var(--white);
+    background: var(--rose); border-color: var(--rose); color: var(--white);
   }
 
   .task-content { flex: 1; min-width: 0; }
-  .task-text {
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-  .task-desc {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    margin-top: 2px;
-  }
+  .task-text { font-size: 0.95rem; font-weight: 500; }
+  .task-desc { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
   .task-tag {
-    flex-shrink: 0;
-    font-size: 0.7rem;
-    padding: 2px 10px;
-    border-radius: 10px;
-    background: var(--rose-light);
-    color: var(--rose-dark);
-    margin-top: 3px;
+    flex-shrink: 0; font-size: 0.7rem; padding: 2px 10px;
+    border-radius: 10px; margin-top: 3px; white-space: nowrap;
   }
-  .task-tag.urgent { background: #FDE8E8; color: #C0392B; }
+  .task-tag.prep { background: #FDF2F5; color: var(--rose-dark); }
   .task-tag.baby { background: #E8F4FD; color: #2C7BB6; }
-  .task-tag.mom { background: #FDF2F5; color: var(--rose-dark); }
+  .task-tag.mom { background: #FFF8E8; color: #B8860B; }
+  .task-tag.urgent { background: #FDE8E8; color: #C0392B; }
+  .task-tag.doc { background: #F0F5F0; color: var(--sage-dark); }
 
-  /* ─── Features Grid ─── */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+  /* ─── Empty State ─── */
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--text-light);
   }
-  .feature-card {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 24px 20px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  .feature-card:hover { transform: translateY(-3px); }
-  .feature-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-    font-size: 1.4rem;
-  }
-  .feature-icon.prep { background: #FDF2F5; }
-  .feature-icon.birth { background: #F0F5F0; }
-  .feature-icon.post { background: #FFF8E8; }
-  .feature-icon.baby { background: #E8F4FD; }
-  .feature-card h3 { font-size: 0.95rem; margin-bottom: 6px; }
-  .feature-card p { font-size: 0.8rem; color: var(--text-light); }
-
-  /* ─── Stage Timeline ─── */
-  .timeline {
-    position: relative;
-    padding-left: 30px;
-    margin-top: 24px;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--rose), var(--sage));
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 24px;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 6px;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--rose);
-    border: 3px solid var(--cream);
-  }
-  .timeline-item:nth-child(2)::before { background: var(--sage); }
-  .timeline-item:nth-child(3)::before { background: var(--rose-dark); }
-  .timeline-item h4 { font-size: 0.95rem; }
-  .timeline-item p { font-size: 0.85rem; color: var(--text-light); }
-
-  /* ─── CTA ─── */
-  .cta {
-    background: linear-gradient(135deg, var(--rose), var(--sage));
-    color: var(--white);
-    text-align: center;
-    padding: 50px 20px;
-    border-radius: var(--radius);
-    margin: 20px 0 50px;
-  }
-  .cta h2 { color: var(--white); font-size: 1.5rem; }
-  .cta p { opacity: 0.9; margin: 10px 0 20px; font-size: 0.95rem; }
-  .cta .btn {
-    display: inline-block;
-    background: var(--white);
-    color: var(--rose-dark);
-    padding: 12px 32px;
-    border-radius: 24px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: transform 0.2s;
-  }
-  .cta .btn:hover { transform: scale(1.05); }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+  .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+  .empty-state p { font-size: 0.9rem; }
 
   /* ─── Footer ─── */
   footer {
-    text-align: center;
-    padding: 30px 20px;
-    color: var(--text-light);
-    font-size: 0.8rem;
+    text-align: center; padding: 30px 20px;
+    color: var(--text-light); font-size: 0.8rem;
     border-top: 1px solid rgba(0,0,0,0.06);
   }
   footer a { color: var(--rose-dark); text-decoration: none; }
 
-  /* ─── Responsive ─── */
   @media (max-width: 480px) {
-    header h1 { font-size: 2rem; }
-    .task-item { padding: 12px 18px; }
-    .demo-card-header { padding: 18px 20px; }
-    .features-grid { grid-template-columns: 1fr 1fr; }
+    header h1 { font-size: 1.6rem; }
+    .due-date-card { padding: 18px; }
+    .due-date-row { flex-direction: column; align-items: stretch; }
+    .due-date-row input[type="date"] { width: 100%; }
+    .task-item { padding: 12px 16px; }
   }
 </style>
 </head>
@@ -322,168 +184,339 @@
 
 <header>
   <h1>初生宝典<small>NestGuide</small></h1>
-  <p>从"完全不懂"到"从容应对"<br>新手父母的一站式孕期 → 新生儿引导工具</p>
-  <span class="header-badge"> 零基础 · 每日引导 · 全程陪伴</span>
+  <p>设置您的预产期，自动生成专属待办清单</p>
 </header>
 
 <div class="container">
 
-  <!-- ─── 今日待办 Demo ─── -->
-  <section>
-    <h2> 打开 App，就是今天该做的事</h2>
-    <p class="subtitle">不需要任何教程，跟着勾选就行。试试看 ⬇️</p>
-
-    <div class="demo-card" id="app-demo">
-      <div class="demo-card-header">
-        <div class="date" id="today-date"></div>
-        <div class="greeting"> 今天需要完成</div>
-        <div class="progress-wrap">
-          <div class="progress-bar">
-            <div class="fill" id="progress-fill"></div>
-          </div>
-          <span class="progress-text" id="progress-text">0 / 0</span>
+  <!-- ─── 预产期设置 ─── -->
+  <section class="due-date-section">
+    <div class="due-date-card">
+      <div class="due-date-row">
+        <div>
+          <label for="due-date"> 预产期（或宝宝出生日）</label>
+          <input type="date" id="due-date">
         </div>
+        <button class="btn" id="set-date-btn"> 开始规划</button>
+        <button class="btn-outline" id="reset-btn">重置</button>
       </div>
-      <div class="task-list" id="task-list"></div>
-    </div>
-  </section>
-
-  <!-- ─── 功能模块 ─── -->
-  <section>
-    <h2> 六大核心模块</h2>
-    <p class="subtitle">按阶段自动解锁，只给当前需要的</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon prep"> </div>
-        <h3>产前准备</h3>
-        <p>待产包清单 · 产检提醒 · 宫缩计时 · 入院决策</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon birth"> </div>
-        <h3>分娩指南</h3>
-        <p>产程引导 · 呼吸法 · 陪产人指南 · 剖腹产流程</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon post"> </div>
-        <h3>产后恢复</h3>
-        <p>每日恢复日志 · 伤口护理 · 心理自评 · 恶露追踪</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon baby"> </div>
-        <h3>新生儿护理</h3>
-        <p>喂养记录 · 睡眠追踪 · 黄疸监测 · 疫苗时间表</p>
+      <div class="stage-banner" id="stage-banner" style="display:none">
+        <div>
+          <div class="stage-name" id="stage-name"></div>
+          <div class="stage-detail" id="stage-detail"></div>
+        </div>
+        <div class="stage-progress" id="stage-progress"></div>
       </div>
     </div>
   </section>
 
-  <!-- ─── 用户旅程 ─── -->
-  <section>
-    <h2> 您的专属旅程</h2>
-    <p class="subtitle">从孕晚期到产后，每一步都有人牵着您</p>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h4> 孕晚期（28-40 周）</h4>
-        <p>每周任务推送 → 准备待产包 → 产检提醒 → 学习分娩知识</p>
-      </div>
-      <div class="timeline-item">
-        <h4> 分娩期</h4>
-        <p>产兆判断 → 入院决策 → 产程实时引导 → 陪产人配合</p>
-      </div>
-      <div class="timeline-item">
-        <h4> 产后（0-3 个月）</h4>
-        <p>妈妈恢复跟踪 → 宝宝护理记录 → 疫苗提醒 → 成长曲线</p>
-      </div>
-    </div>
+  <!-- ─── 任务清单 ─── -->
+  <section id="task-section" style="display:none">
+    <div id="task-container"></div>
   </section>
 
-  <!-- ─── 核心理念 ─── -->
-  <section>
-    <h2> 设计理念</h2>
-    <p class="subtitle">我们不是又一个母婴 App，而是一个有温度的向导</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
-      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
-        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
-        <h4 style="font-size:0.9rem;margin-bottom:4px">零学习成本</h4>
-        <p style="font-size:0.8rem;color:var(--text-light)">打开就是"今日待办"，无需教程</p>
-      </div>
-      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
-        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
-        <h4 style="font-size:0.9rem;margin-bottom:4px">按阶段解锁</h4>
-        <p style="font-size:0.8rem;color:var(--text-light)">只展示当前需要的，不制造焦虑</p>
-      </div>
-      <div style="background:var(--white);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
-        <div style="font-size:1.6rem;margin-bottom:8px"> </div>
-        <h4 style="font-size:0.9rem;margin-bottom:4px">有温度的设计</h4>
-        <p style="font-size:0.8rem;color:var(--text-light)">每个任务都告诉你"为什么"和"怎么做"</p>
-      </div>
+  <!-- ─── 空状态 ─── -->
+  <section id="empty-section">
+    <div class="empty-state">
+      <div class="icon"> </div>
+      <h3>请设置您的预产期</h3>
+      <p>选择日期后，系统会根据您当前所处的阶段<br>自动生成每周待办清单，提醒您提前准备</p>
     </div>
   </section>
-
-  <!-- ─── CTA ─── -->
-  <div class="cta">
-    <h2> 正在开发中，敬请期待</h2>
-    <p>如果您有想法或建议，欢迎在 GitHub 上提交 Issue</p>
-    <a class="btn" href="https://github.com/Wadesha/nestguide"> 前往 GitHub</a>
-  </div>
 
 </div>
 
 <footer>
-  <p><a href="https://github.com/Wadesha/nestguide">初生宝典 NestGuide</a> · 产品概念展示 · 仅供参考，不构成医疗建议</p>
+  <a href="https://github.com/Wadesha/nestguide">初生宝典 NestGuide</a> · 仅供参考，不构成医疗建议
 </footer>
 
 <script>
-  (function() {
-    // ─── 日期显示 ───
-    const now = new Date();
-    const weekdays = ['日','一','二','三','四','五','六'];
-    const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 星期${weekdays[now.getDay()]}`;
-    document.getElementById('today-date').textContent = '  ' + dateStr;
+(function() {
+  // ─── 任务数据库 ───
+  // week: 负数 = 产前（距预产期周数），正数 = 产后（周）
+  // 例如 week: -12 表示预产期前 12 周（约孕 28 周）
+  const TASK_DB = [
+    // ═══ 孕晚期 ═══
+    { week: -12, text: '开始数胎动', desc: '每天早中晚各一次，每次 1 小时，记录胎动次数', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -12, text: '预约 28 周产检', desc: '糖耐量筛查（OGTT），需空腹', tag: ' 产检', tagClass: 'doc' },
+    { week: -12, text: '准备孕妇装', desc: '更换大号内衣、托腹带、宽松衣物', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -12, text: '了解孕期营养', desc: '补充钙铁锌，控制体重增长', tag: ' 妈妈', tagClass: 'mom' },
 
-    // ─── 任务数据 ───
-    const tasks = [
-      { id: 't1', text: '清点待产包', desc: '检查妈妈篇 + 宝宝篇 + 证件篇是否齐全', tag: ' 产前', tagClass: '' },
-      { id: 't2', text: '确认分娩医院路线', desc: '规划好去医院的路线，提前踩点', tag: ' 重要', tagClass: 'urgent' },
-      { id: 't3', text: '学习拉玛泽呼吸法', desc: '每天练习 10 分钟，产时用得上', tag: ' 妈妈', tagClass: 'mom' },
-      { id: 't4', text: '宝宝衣物清洗消毒', desc: '新衣服用婴儿专用洗衣液清洗，晾晒', tag: ' 宝宝', tagClass: 'baby' },
-      { id: 't5', text: '记录今天胎动', desc: '早中晚各数一次，每次 1 小时', tag: ' 妈妈', tagClass: 'mom' },
-    ];
+    { week: -10, text: '了解待产包清单', desc: '开始列清单，分妈妈篇、宝宝篇、证件篇', tag: ' 产前', tagClass: 'prep' },
+    { week: -10, text: '参加孕妇学校', desc: '了解分娩过程、产后护理、新生儿护理知识', tag: ' 产前', tagClass: 'prep' },
+    { week: -10, text: '准备新生儿衣物', desc: '购买 3-5 套新生儿连体衣、包被、帽子、袜子', tag: ' 宝宝', tagClass: 'baby' },
+    { week: -10, text: '预约 30 周产检', desc: '常规产检 + 血常规', tag: ' 产检', tagClass: 'doc' },
 
-    const taskListEl = document.getElementById('task-list');
-    const progressFill = document.getElementById('progress-fill');
-    const progressText = document.getElementById('progress-text');
+    { week: -8, text: '准备待产包（妈妈篇）', desc: '产褥垫、安心裤、哺乳内衣、吸奶器、拖鞋等', tag: ' 产前', tagClass: 'prep' },
+    { week: -8, text: '确定分娩医院', desc: '确认医院床位、入院流程、陪产政策', tag: ' 产前', tagClass: 'prep' },
+    { week: -8, text: '准备婴儿床', desc: '安装婴儿床、床垫、床围，通风散味', tag: ' 宝宝', tagClass: 'baby' },
+    { week: -8, text: '了解分娩方式', desc: '了解顺产和剖腹产的区别，和家人讨论', tag: ' 产前', tagClass: 'prep' },
 
-    function render() {
-      taskListEl.innerHTML = '';
-      let doneCount = 0;
-      tasks.forEach(t => {
-        const done = localStorage.getItem('nestguide_' + t.id) === 'true';
-        if (done) doneCount++;
-        const div = document.createElement('div');
-        div.className = 'task-item' + (done ? ' done' : '');
-        div.innerHTML = `
-          <div class="task-check">${done ? '✓' : ''}</div>
-          <div class="task-content">
-            <div class="task-text">${t.text}</div>
-            <div class="task-desc">${t.desc}</div>
-          </div>
-          <span class="task-tag ${t.tagClass}">${t.tag}</span>
-        `;
-        div.addEventListener('click', () => {
-          const key = 'nestguide_' + t.id;
-          const nowDone = localStorage.getItem(key) === 'true';
-          localStorage.setItem(key, nowDone ? 'false' : 'true');
-          render();
-        });
-        taskListEl.appendChild(div);
-      });
-      const total = tasks.length;
-      progressFill.style.width = total > 0 ? (doneCount / total * 100) + '%' : '0%';
-      progressText.textContent = `${doneCount} / ${total}`;
+    { week: -6, text: '完成待产包（宝宝篇+证件篇）', desc: '尿不湿、奶粉、奶瓶、证件原件及复印件', tag: ' 产前', tagClass: 'prep' },
+    { week: -6, text: '确定陪产人', desc: '确定谁陪产，提前沟通好分工', tag: ' 产前', tagClass: 'prep' },
+    { week: -6, text: '学习拉玛泽呼吸法', desc: '每天练习 10-15 分钟，产时减轻疼痛', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -6, text: '分娩计划书', desc: '填写分娩计划书，和医生沟通', tag: ' 产检', tagClass: 'doc' },
+
+    { week: -4, text: '每周产检（36 周起）', desc: '36 周后每周一次产检，监测胎心胎位', tag: ' 产检', tagClass: 'doc' },
+    { week: -4, text: '学习产后护理知识', desc: '了解产后恢复、恶露观察、伤口护理', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -4, text: '确定产后谁来照顾', desc: '月嫂/月子中心/家人，提前预订', tag: ' 产前', tagClass: 'prep' },
+    { week: -4, text: '准备新生儿洗护用品', desc: '沐浴露、润肤露、护臀膏、浴盆、水温计', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: -3, text: '待产包放在门口显眼位置', desc: '随时可能发动，拎包就走', tag: ' 重要', tagClass: 'urgent' },
+    { week: -3, text: '规划去医院路线', desc: '提前踩点，计算好时间，找好停车位', tag: ' 重要', tagClass: 'urgent' },
+    { week: -3, text: '安装婴儿安全座椅', desc: '提前安装好，检查是否牢固', tag: ' 宝宝', tagClass: 'baby' },
+    { week: -3, text: '保持手机畅通', desc: '37 周后随时可能发动，保持联系', tag: ' 重要', tagClass: 'urgent' },
+
+    { week: -2, text: '确认医院入院流程', desc: '办入院手续的窗口、所需证件、费用', tag: ' 产前', tagClass: 'prep' },
+    { week: -2, text: '学习母乳喂养知识', desc: '正确衔乳姿势、喂养频率、堵奶预防', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -2, text: '准备家中环境', desc: '打扫卫生，设置宝宝区域，准备待产零食', tag: ' 产前', tagClass: 'prep' },
+    { week: -2, text: '确认联系方式', desc: '医院电话、家人电话、出租车/120 备选', tag: ' 重要', tagClass: 'urgent' },
+
+    { week: -1, text: '每天数胎动，观察产兆', desc: '注意宫缩频率、破水、见红等产兆', tag: ' 重要', tagClass: 'urgent' },
+    { week: -1, text: '放松心情，适当运动', desc: '散步、拉伸，保持体力', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -1, text: '准备好产后恢复用品', desc: '收腹带、哺乳枕、防溢乳垫', tag: ' 妈妈', tagClass: 'mom' },
+    { week: -1, text: '和家人确认分工', desc: '谁负责送医、谁负责照顾、谁负责办手续', tag: ' 产前', tagClass: 'prep' },
+
+    { week: 0, text: '随时准备入院', desc: '出现规律宫缩/破水/见红，立即联系医院', tag: ' 重要', tagClass: 'urgent' },
+    { week: 0, text: '带上待产包出发', desc: '检查待产包是否齐全，带上手机充电器', tag: ' 重要', tagClass: 'urgent' },
+    { week: 0, text: '保持镇定，配合医生', desc: '按照分娩计划进行，相信自己', tag: ' 妈妈', tagClass: 'mom' },
+
+    // ═══ 产后 ═══
+    { week: 1, text: '产后充分休息', desc: '产后 24 小时尽量卧床，家人多分担', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 1, text: '伤口护理', desc: '顺产侧切/剖腹产刀口，遵医嘱清洁消毒', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 1, text: '学习正确哺乳姿势', desc: '摇篮式/侧卧式，确保宝宝正确衔乳', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 1, text: '记录宝宝第一次排便', desc: '胎便（黑色）应在 24 小时内排出', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 1, text: '测量宝宝体温', desc: '每天早晚各一次，正常 36.5-37.5°C', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 2, text: '监测宝宝黄疸', desc: '观察皮肤和眼白颜色，严重时及时就医', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 2, text: '脐带护理', desc: '保持干燥清洁，用 75% 酒精消毒，注意异常', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 2, text: '观察恶露情况', desc: '颜色从红→粉→白，量逐渐减少，异常及时就医', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 2, text: '宝宝喂养记录', desc: '记录每次喂奶时间、时长、奶量', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 3, text: '预约产后 42 天复查', desc: '妈妈和宝宝都需要复查', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 3, text: '宝宝疫苗接种（乙肝第二针）', desc: '出生后 1 个月接种乙肝疫苗第二针', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 3, text: '妈妈心理状态自评', desc: '关注产后情绪，必要时做 EPDS 自评量表', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 3, text: '宝宝拍嗝技巧', desc: '每次喂奶后拍嗝 10-15 分钟，防止吐奶', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 4, text: '满月体检', desc: '测量体重、身高、头围，评估发育情况', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 4, text: '宝宝生长曲线记录', desc: '记录体重、身高数据，绘制生长曲线', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 4, text: '产后恢复评估', desc: '检查子宫恢复情况、伤口愈合情况', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 4, text: '肠绞痛预防和缓解', desc: '排气操、飞机抱、顺时针揉肚子', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 6, text: '产后 42 天复查', desc: '妈妈：盆底肌、子宫恢复。宝宝：全面体检', tag: ' 重要', tagClass: 'urgent' },
+    { week: 6, text: '宝宝抬头训练', desc: '每天俯卧 2-3 次，每次 1-2 分钟，锻炼颈部', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 6, text: '妈妈盆底肌康复', desc: '凯格尔运动，每天 3 组，每组 10 次', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 6, text: '宝宝疫苗（五联/肺炎）', desc: '根据社区医院安排接种', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 8, text: '宝宝睡眠规律培养', desc: '建立白天小睡和夜间睡眠的区分', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 8, text: '妈妈逐步恢复运动', desc: '产后瑜伽、散步，避免剧烈运动', tag: ' 妈妈', tagClass: 'mom' },
+    { week: 8, text: '宝宝互动游戏', desc: '黑白卡追视、摇铃、和宝宝说话', tag: ' 宝宝', tagClass: 'baby' },
+
+    { week: 12, text: '三个月体检', desc: '全面评估发育情况：抬头、追视、社交反应', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 12, text: '宝宝疫苗接种', desc: '五联/百白破等疫苗第二针', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 12, text: '宝宝睡眠倒退应对', desc: '3 个月左右可能出现睡眠倒退，提前了解', tag: ' 宝宝', tagClass: 'baby' },
+    { week: 12, text: '妈妈回归职场准备', desc: '如需要，提前规划背奶方案和育儿安排', tag: ' 妈妈', tagClass: 'mom' },
+  ];
+
+  // ─── DOM refs ───
+  const dueDateInput = document.getElementById('due-date');
+  const setBtn = document.getElementById('set-date-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  const stageBanner = document.getElementById('stage-banner');
+  const stageName = document.getElementById('stage-name');
+  const stageDetail = document.getElementById('stage-detail');
+  const stageProgress = document.getElementById('stage-progress');
+  const taskSection = document.getElementById('task-section');
+  const taskContainer = document.getElementById('task-container');
+  const emptySection = document.getElementById('empty-section');
+
+  // ─── 工具函数 ───
+  function weeksBetween(d1, d2) {
+    const diff = d2.getTime() - d1.getTime();
+    return Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
+  }
+
+  function formatDate(date) {
+    return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+  }
+
+  // ─── 核心逻辑 ───
+  function getStageInfo(dueDateStr) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const dueDate = new Date(dueDateStr);
+    dueDate.setHours(0,0,0,0);
+
+    const weeksToDue = weeksBetween(today, dueDate); // 正数=还有X周到预产期
+
+    if (weeksToDue > 12) {
+      // 孕早期/中期，还没到使用阶段
+      return { stage: 'early', label: '孕早期/中期', detail: `距离预产期还有 ${weeksToDue} 周，建议 ${weeksToDue - 12} 周后再来使用`, weeks: [] };
+    } else if (weeksToDue >= 0) {
+      // 孕晚期：-12 到 0 周
+      const gw = 40 - weeksToDue; // 孕周
+      const startWeek = Math.max(-12, -weeksToDue - 2); // 往前多展示2周
+      const endWeek = Math.min(0, -weeksToDue + 4); // 往后展示4周
+      return {
+        stage: 'prenatal',
+        label: ` 孕晚期 · 孕 ${gw} 周`,
+        detail: `距离预产期还有 ${weeksToDue} 周`,
+        progress: `已孕 ${gw} 周 / 40 周`,
+        startWeek, endWeek, currentWeek: -weeksToDue
+      };
+    } else {
+      // 产后
+      const weeksAfter = Math.abs(weeksToDue); // 产后第几周
+      const startWeek = Math.max(1, weeksAfter - 2);
+      const endWeek = Math.min(12, weeksAfter + 4);
+      return {
+        stage: 'postpartum',
+        label: ` 产后 · 第 ${weeksAfter} 周`,
+        detail: `宝宝出生 ${weeksAfter} 周了`,
+        progress: `产后第 ${weeksAfter} 周 / 12 周`,
+        startWeek, endWeek, currentWeek: weeksAfter
+      };
+    }
+  }
+
+  function getTasksForWeeks(startWeek, endWeek, currentWeek) {
+    // 筛选出在范围内的任务
+    let tasks = TASK_DB.filter(t => t.week >= startWeek && t.week <= endWeek);
+    // 按 week 排序
+    tasks.sort((a, b) => a.week - b.week);
+    // 按 week 分组
+    const groups = {};
+    tasks.forEach(t => {
+      if (!groups[t.week]) groups[t.week] = [];
+      groups[t.week].push(t);
+    });
+    return { groups, taskCount: tasks.length };
+  }
+
+  function weekLabel(week) {
+    if (week < 0) {
+      const gw = 40 + week; // week=-12 => 28周
+      return `孕 ${gw} 周`;
+    } else if (week === 0) {
+      return ' 预产期';
+    } else {
+      return `产后第 ${week} 周`;
+    }
+  }
+
+  function weekDesc(week, currentWeek) {
+    if (week < currentWeek) return '✅ 已完成，可回顾';
+    if (week === currentWeek) return ' 当前阶段';
+    return ' 即将到来，提前准备';
+  }
+
+  function render() {
+    const saved = localStorage.getItem('nestguide_due_date');
+    if (!saved) {
+      stageBanner.style.display = 'none';
+      taskSection.style.display = 'none';
+      emptySection.style.display = 'block';
+      return;
     }
 
+    dueDateInput.value = saved;
+    const info = getStageInfo(saved);
+
+    // 更新 banner
+    stageBanner.style.display = 'flex';
+    stageName.textContent = info.label;
+    stageDetail.textContent = info.detail;
+    stageProgress.textContent = info.progress || '';
+
+    if (info.stage === 'early') {
+      taskSection.style.display = 'none';
+      emptySection.style.display = 'block';
+      document.querySelector('.empty-state h3').textContent = ' 还不到使用时间哦';
+      document.querySelector('.empty-state p').textContent = info.detail;
+      return;
+    }
+
+    emptySection.style.display = 'none';
+    taskSection.style.display = 'block';
+
+    const { groups } = getTasksForWeeks(info.startWeek, info.endWeek, info.currentWeek);
+    const weekKeys = Object.keys(groups).map(Number).sort((a,b) => a-b);
+
+    let html = '';
+    weekKeys.forEach(week => {
+      const tasks = groups[week];
+      let doneCount = 0;
+      let taskHtml = '';
+      tasks.forEach(t => {
+        const key = 'task_' + btoa(t.text + '_' + t.week);
+        const done = localStorage.getItem(key) === 'true';
+        if (done) doneCount++;
+        taskHtml += `
+          <div class="task-item${done ? ' done' : ''}" data-key="${key}">
+            <div class="task-check">${done ? '✓' : ''}</div>
+            <div class="task-content">
+              <div class="task-text">${t.text}</div>
+              <div class="task-desc">${t.desc}</div>
+            </div>
+            <span class="task-tag ${t.tagClass}">${t.tag}</span>
+          </div>
+        `;
+      });
+
+      const isCurrent = week === info.currentWeek;
+      html += `
+        <div class="task-group">
+          <div class="task-group-header">
+            <span class="week-label">${isCurrent ? '  ' : ''}${weekLabel(week)}</span>
+            <span class="week-sub">${weekDesc(week, info.currentWeek)}</span>
+            <span class="week-progress">${doneCount}/${tasks.length}</span>
+          </div>
+          <div class="task-card">${taskHtml}</div>
+        </div>
+      `;
+    });
+
+    taskContainer.innerHTML = html;
+
+    // 绑定点击事件
+    document.querySelectorAll('.task-item').forEach(el => {
+      el.addEventListener('click', function() {
+        const key = this.dataset.key;
+        const done = localStorage.getItem(key) === 'true';
+        localStorage.setItem(key, done ? 'false' : 'true');
+        render();
+      });
+    });
+  }
+
+  // ─── 事件绑定 ───
+  setBtn.addEventListener('click', () => {
+    const val = dueDateInput.value;
+    if (!val) { alert('请选择预产期或宝宝出生日期'); return; }
+    localStorage.setItem('nestguide_due_date', val);
     render();
-  })();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (!confirm('重置将清除所有已勾选的任务，确定吗？')) return;
+    localStorage.removeItem('nestguide_due_date');
+    // 清除所有任务勾选状态
+    const keys = Object.keys(localStorage);
+    keys.forEach(k => { if (k.startsWith('task_')) localStorage.removeItem(k); });
+    render();
+  });
+
+  // ─── 初始化 ───
+  // 设置默认日期为预产期（今天 + 12 周，约孕 28 周）
+  const defaultDate = new Date();
+  defaultDate.setDate(defaultDate.getDate() + 12 * 7);
+  dueDateInput.value = formatDate(defaultDate);
+
+  // 自动加载已保存的日期
+  if (localStorage.getItem('nestguide_due_date')) {
+    render();
+  }
+})();
 </script>
 </body>
 </html>
