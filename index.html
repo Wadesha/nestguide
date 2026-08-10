@@ -505,7 +505,7 @@
     const totalCount = allVisibleTasks.length;
     let doneCount = 0;
     allVisibleTasks.forEach(t => {
-      const key = 'task_' + btoa(t.text + '_' + t.week);
+      const key = 'task_' + encodeURIComponent(t.text + '_' + t.week);
       if (localStorage.getItem(key) === 'true') doneCount++;
     });
     const pendingCount = totalCount - doneCount;
@@ -527,7 +527,7 @@
       let doneInWeek = 0;
       let taskHtml = '';
       tasks.forEach(t => {
-        const key = 'task_' + btoa(t.text + '_' + t.week);
+        const key = 'task_' + encodeURIComponent(t.text + '_' + t.week);
         const done = localStorage.getItem(key) === 'true';
         if (done) doneInWeek++;
         taskHtml += `
