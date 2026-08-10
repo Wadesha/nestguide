@@ -19,7 +19,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ─── Header ─── */
   header {
     background: linear-gradient(135deg, var(--rose) 0%, var(--sage) 100%);
     color: var(--white); text-align: center; padding: 48px 20px 36px;
@@ -35,28 +34,17 @@
   header h1 small { font-size: 0.85rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 4px; }
   header p { margin-top: 12px; font-size: 1rem; opacity: 0.9; position: relative; }
 
-  /* ─── Container ─── */
   .container { max-width: 780px; margin: 0 auto; padding: 0 16px; }
   section { padding: 36px 0; }
 
   /* ─── Due Date Picker ─── */
-  .due-date-section {
-    margin-top: -20px;
-    position: relative;
-    z-index: 2;
-  }
+  .due-date-section { margin-top: -20px; position: relative; z-index: 2; }
   .due-date-card {
     background: var(--white); border-radius: var(--radius);
-    box-shadow: 0 4px 20px rgba(61,44,46,0.12);
-    padding: 24px 28px;
+    box-shadow: 0 4px 20px rgba(61,44,46,0.12); padding: 24px 28px;
   }
-  .due-date-row {
-    display: flex; align-items: flex-end; gap: 16px;
-    flex-wrap: wrap;
-  }
-  .due-date-row label {
-    font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 6px;
-  }
+  .due-date-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .due-date-row label { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 6px; }
   .due-date-row input[type="date"] {
     padding: 10px 14px; border: 2px solid #E8E0DC; border-radius: var(--radius-sm);
     font-size: 1rem; outline: none; transition: border-color 0.2s;
@@ -85,46 +73,44 @@
     display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 10px;
   }
-  .stage-banner .stage-name {
-    font-size: 1.1rem; font-weight: 700;
+  .stage-banner .stage-name { font-size: 1.1rem; font-weight: 700; }
+  .stage-banner .stage-detail { font-size: 0.85rem; color: var(--text-light); }
+  .stage-banner .stage-progress { font-size: 0.9rem; font-weight: 600; color: var(--rose-dark); }
+
+  /* ─── Overall Progress ─── */
+  .overall-progress {
+    background: var(--white); border-radius: var(--radius-sm);
+    padding: 18px 20px; margin-top: 18px;
+    box-shadow: var(--shadow);
   }
-  .stage-banner .stage-detail {
-    font-size: 0.85rem; color: var(--text-light);
+  .overall-progress .stat-row {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   }
-  .stage-banner .stage-progress {
-    font-size: 0.9rem; font-weight: 600;
-    color: var(--rose-dark);
-  }
+  .overall-progress .stat-item { text-align: center; flex: 1; min-width: 80px; }
+  .overall-progress .stat-num { font-size: 1.4rem; font-weight: 700; color: var(--rose-dark); }
+  .overall-progress .stat-label { font-size: 0.75rem; color: var(--text-light); }
 
   /* ─── Task Groups ─── */
-  .task-group {
-    margin-bottom: 28px;
-  }
+  .task-group { margin-bottom: 24px; }
   .task-group-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
   }
-  .task-group-header .week-label {
-    font-size: 1.05rem; font-weight: 700;
+  .task-group-header .week-label { font-size: 1rem; font-weight: 700; }
+  .task-group-header .week-status {
+    font-size: 0.75rem; color: var(--text-light);
+    background: var(--sage-light); padding: 2px 10px; border-radius: 10px;
   }
-  .task-group-header .week-sub {
-    font-size: 0.8rem; color: var(--text-light);
-  }
-  .task-group-header .week-progress {
-    margin-left: auto;
-    font-size: 0.8rem; color: var(--text-light);
-    background: var(--sage-light); padding: 2px 12px;
-    border-radius: 10px;
-  }
+  .task-group-header .week-status.current { background: #FDF2F5; color: var(--rose-dark); font-weight: 600; }
+  .task-group-header .week-progress { margin-left: auto; font-size: 0.8rem; color: var(--text-light); }
+  .task-group-header .week-icon { font-size: 1.1rem; }
 
   .task-card {
     background: var(--white); border-radius: var(--radius-sm);
     box-shadow: var(--shadow); overflow: hidden;
-    margin-bottom: 8px;
   }
   .task-item {
     display: flex; align-items: flex-start; gap: 14px;
-    padding: 14px 20px; cursor: pointer;
+    padding: 12px 18px; cursor: pointer;
     transition: background 0.15s; border-bottom: 1px solid rgba(0,0,0,0.04);
   }
   .task-item:last-child { border-bottom: none; }
@@ -133,42 +119,34 @@
   .task-item.done .task-text { text-decoration: line-through; }
 
   .task-check {
-    width: 22px; height: 22px; border: 2px solid var(--rose);
-    border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+    width: 20px; height: 20px; border: 2px solid var(--rose);
+    border-radius: 5px; flex-shrink: 0; margin-top: 2px;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; font-size: 13px; color: transparent;
+    transition: all 0.2s; font-size: 12px; color: transparent;
   }
-  .task-item.done .task-check {
-    background: var(--rose); border-color: var(--rose); color: var(--white);
-  }
+  .task-item.done .task-check { background: var(--rose); border-color: var(--rose); color: var(--white); }
 
   .task-content { flex: 1; min-width: 0; }
-  .task-text { font-size: 0.95rem; font-weight: 500; }
-  .task-desc { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+  .task-text { font-size: 0.9rem; font-weight: 500; }
+  .task-desc { font-size: 0.78rem; color: var(--text-light); margin-top: 1px; }
   .task-tag {
-    flex-shrink: 0; font-size: 0.7rem; padding: 2px 10px;
-    border-radius: 10px; margin-top: 3px; white-space: nowrap;
+    flex-shrink: 0; font-size: 0.65rem; padding: 2px 8px;
+    border-radius: 8px; white-space: nowrap;
   }
   .task-tag.prep { background: #FDF2F5; color: var(--rose-dark); }
   .task-tag.baby { background: #E8F4FD; color: #2C7BB6; }
   .task-tag.mom { background: #FFF8E8; color: #B8860B; }
   .task-tag.urgent { background: #FDE8E8; color: #C0392B; }
   .task-tag.doc { background: #F0F5F0; color: var(--sage-dark); }
+  .task-tag.skill { background: #EDE8F5; color: #6B4C9A; }
 
   /* ─── Empty State ─── */
-  .empty-state {
-    text-align: center; padding: 60px 20px; color: var(--text-light);
-  }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-light); }
   .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
   .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
   .empty-state p { font-size: 0.9rem; }
 
-  /* ─── Footer ─── */
-  footer {
-    text-align: center; padding: 30px 20px;
-    color: var(--text-light); font-size: 0.8rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
+  footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid rgba(0,0,0,0.06); }
   footer a { color: var(--rose-dark); text-decoration: none; }
 
   @media (max-width: 480px) {
@@ -176,7 +154,8 @@
     .due-date-card { padding: 18px; }
     .due-date-row { flex-direction: column; align-items: stretch; }
     .due-date-row input[type="date"] { width: 100%; }
-    .task-item { padding: 12px 16px; }
+    .task-item { padding: 10px 14px; }
+    .overall-progress .stat-item { min-width: 60px; }
   }
 </style>
 </head>
@@ -184,12 +163,11 @@
 
 <header>
   <h1>初生宝典<small>NestGuide</small></h1>
-  <p>设置您的预产期，自动生成专属待办清单</p>
+  <p>设置预产期，自动生成从孕晚期到产后 3 个月的完整待办清单</p>
 </header>
 
 <div class="container">
 
-  <!-- ─── 预产期设置 ─── -->
   <section class="due-date-section">
     <div class="due-date-card">
       <div class="due-date-row">
@@ -207,20 +185,28 @@
         </div>
         <div class="stage-progress" id="stage-progress"></div>
       </div>
+      <div class="overall-progress" id="overall-progress" style="display:none">
+        <div class="stat-row">
+          <div class="stat-item"><div class="stat-num" id="stat-total">0</div><div class="stat-label">总任务</div></div>
+          <div class="stat-item"><div class="stat-num" id="stat-done">0</div><div class="stat-label">已完成</div></div>
+          <div class="stat-item"><div class="stat-num" id="stat-pending">0</div><div class="stat-label">待完成</div></div>
+          <div class="stat-item"><div class="stat-num" id="stat-rate">0%</div><div class="stat-label">完成率</div></div>
+          <div class="stat-item"><div class="stat-num" id="stat-weeks">0</div><div class="stat-label">覆盖周数</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── 任务清单 ─── -->
   <section id="task-section" style="display:none">
     <div id="task-container"></div>
   </section>
 
-  <!-- ─── 空状态 ─── -->
   <section id="empty-section">
     <div class="empty-state">
       <div class="icon"> </div>
       <h3>请设置您的预产期</h3>
-      <p>选择日期后，系统会根据您当前所处的阶段<br>自动生成每周待办清单，提醒您提前准备</p>
+      <p>选择日期后，系统会根据您当前所处的阶段<br>展示从孕 28 周到产后 12 周的完整待办清单</p>
+      <p style="margin-top:12px;font-size:0.8rem;color:var(--rose-dark)"> 每周 3-4 项任务，轻松跟上节奏</p>
     </div>
   </section>
 
@@ -232,90 +218,151 @@
 
 <script>
 (function() {
-  // ─── 任务数据库 ───
-  // week: 负数 = 产前（距预产期周数），正数 = 产后（周）
-  // 例如 week: -12 表示预产期前 12 周（约孕 28 周）
+  // ═══════════════════════════════════════════════════
+  //  任务数据库：按周负载均衡
+  //  week: 负数 = 产前，0 = 预产期，正数 = 产后
+  //  每周 3-5 项任务，含物品准备、技能学习、医疗事项
+  // ═══════════════════════════════════════════════════
   const TASK_DB = [
-    // ═══ 孕晚期 ═══
-    { week: -12, text: '开始数胎动', desc: '每天早中晚各一次，每次 1 小时，记录胎动次数', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -12, text: '预约 28 周产检', desc: '糖耐量筛查（OGTT），需空腹', tag: ' 产检', tagClass: 'doc' },
-    { week: -12, text: '准备孕妇装', desc: '更换大号内衣、托腹带、宽松衣物', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -12, text: '了解孕期营养', desc: '补充钙铁锌，控制体重增长', tag: ' 妈妈', tagClass: 'mom' },
+    // ── 孕 28 周（week -12）──
+    { week: -12, text: '开始数胎动', desc: '每天早中晚各一次，每次数 1 小时，记录胎动次数', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -12, text: '预约 28 周产检（糖耐量 OGTT）', desc: '需空腹，提前 8 小时禁食，带上产检本', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: -12, text: '准备孕妇装', desc: '更换大号内衣、托腹带、宽松衣物，买 2 套哺乳睡衣', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -12, text: '了解孕期营养补充', desc: '孕晚期每天需补钙 1000mg、铁 27mg，咨询医生选品牌', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: -10, text: '了解待产包清单', desc: '开始列清单，分妈妈篇、宝宝篇、证件篇', tag: ' 产前', tagClass: 'prep' },
-    { week: -10, text: '参加孕妇学校', desc: '了解分娩过程、产后护理、新生儿护理知识', tag: ' 产前', tagClass: 'prep' },
-    { week: -10, text: '准备新生儿衣物', desc: '购买 3-5 套新生儿连体衣、包被、帽子、袜子', tag: ' 宝宝', tagClass: 'baby' },
-    { week: -10, text: '预约 30 周产检', desc: '常规产检 + 血常规', tag: ' 产检', tagClass: 'doc' },
+    // ── 孕 29 周（week -11）──
+    { week: -11, text: '学习新生儿护理基础知识', desc: '了解黄疸、脐带护理、吐奶处理等常见问题', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -11, text: '准备体重秤和血压计', desc: '每周自测体重和血压，监控孕期变化', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -11, text: '了解顺产和剖腹产的区别', desc: '了解两种分娩方式的流程、恢复时间和风险', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: -8, text: '准备待产包（妈妈篇）', desc: '产褥垫、安心裤、哺乳内衣、吸奶器、拖鞋等', tag: ' 产前', tagClass: 'prep' },
-    { week: -8, text: '确定分娩医院', desc: '确认医院床位、入院流程、陪产政策', tag: ' 产前', tagClass: 'prep' },
-    { week: -8, text: '准备婴儿床', desc: '安装婴儿床、床垫、床围，通风散味', tag: ' 宝宝', tagClass: 'baby' },
-    { week: -8, text: '了解分娩方式', desc: '了解顺产和剖腹产的区别，和家人讨论', tag: ' 产前', tagClass: 'prep' },
+    // ── 孕 30 周（week -10）──
+    { week: -10, text: '了解待产包需要准备什么', desc: '列清单，分妈妈篇、宝宝篇、证件篇，开始采购', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -10, text: '报名孕妇学校课程', desc: '学习分娩过程、产后护理、新生儿护理等实用课程', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -10, text: '准备新生儿衣物和包被', desc: '买 3-5 套 52 码连体衣、包被 2 条、胎帽 2 顶', tag: ' 物品准备', tagClass: 'baby' },
+    { week: -10, text: '预约 30 周产检', desc: '常规产检 + 血常规，检查是否贫血', tag: ' 医疗事项', tagClass: 'doc' },
 
-    { week: -6, text: '完成待产包（宝宝篇+证件篇）', desc: '尿不湿、奶粉、奶瓶、证件原件及复印件', tag: ' 产前', tagClass: 'prep' },
-    { week: -6, text: '确定陪产人', desc: '确定谁陪产，提前沟通好分工', tag: ' 产前', tagClass: 'prep' },
-    { week: -6, text: '学习拉玛泽呼吸法', desc: '每天练习 10-15 分钟，产时减轻疼痛', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -6, text: '分娩计划书', desc: '填写分娩计划书，和医生沟通', tag: ' 产检', tagClass: 'doc' },
+    // ── 孕 31 周（week -9）──
+    { week: -9, text: '学习新生儿喂养知识', desc: '了解母乳喂养的好处、奶粉冲泡方法、喂养频率', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -9, text: '准备哺乳相关用品', desc: '哺乳内衣 2-3 件、防溢乳垫 1 盒、吸奶器（可先租）', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -9, text: '了解产后恢复基本知识', desc: '注意恶露变化、伤口护理、盆底肌恢复等', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: -4, text: '每周产检（36 周起）', desc: '36 周后每周一次产检，监测胎心胎位', tag: ' 产检', tagClass: 'doc' },
-    { week: -4, text: '学习产后护理知识', desc: '了解产后恢复、恶露观察、伤口护理', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -4, text: '确定产后谁来照顾', desc: '月嫂/月子中心/家人，提前预订', tag: ' 产前', tagClass: 'prep' },
-    { week: -4, text: '准备新生儿洗护用品', desc: '沐浴露、润肤露、护臀膏、浴盆、水温计', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 孕 32 周（week -8）──
+    { week: -8, text: '准备待产包（妈妈篇）', desc: '产褥垫 20 片、安心裤/一次性内裤 15 条、吸管杯、卫生巾', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -8, text: '确定分娩医院并办理手续', desc: '确认医院床位、入院流程、陪产政策，交押金', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: -8, text: '准备婴儿床和床上用品', desc: '安装婴儿床，买床垫、床围、睡袋，提前通风散味', tag: ' 物品准备', tagClass: 'baby' },
+    { week: -8, text: '和家人讨论分娩方式偏好', desc: '和医生沟通，根据自身情况确定顺产或剖腹产', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: -3, text: '待产包放在门口显眼位置', desc: '随时可能发动，拎包就走', tag: ' 重要', tagClass: 'urgent' },
-    { week: -3, text: '规划去医院路线', desc: '提前踩点，计算好时间，找好停车位', tag: ' 重要', tagClass: 'urgent' },
-    { week: -3, text: '安装婴儿安全座椅', desc: '提前安装好，检查是否牢固', tag: ' 宝宝', tagClass: 'baby' },
-    { week: -3, text: '保持手机畅通', desc: '37 周后随时可能发动，保持联系', tag: ' 重要', tagClass: 'urgent' },
+    // ── 孕 33 周（week -7）──
+    { week: -7, text: '学习正确哺乳姿势', desc: '摇篮式、侧卧式、橄榄球式，每种都练习一下', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -7, text: '准备新生儿洗护用品清单', desc: '沐浴露、润肤露、护臀膏、浴盆、水温计、小方巾', tag: ' 物品准备', tagClass: 'baby' },
+    { week: -7, text: '了解产后情绪管理', desc: '了解产后抑郁的症状，提前和家人沟通好心理支持', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: -2, text: '确认医院入院流程', desc: '办入院手续的窗口、所需证件、费用', tag: ' 产前', tagClass: 'prep' },
-    { week: -2, text: '学习母乳喂养知识', desc: '正确衔乳姿势、喂养频率、堵奶预防', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -2, text: '准备家中环境', desc: '打扫卫生，设置宝宝区域，准备待产零食', tag: ' 产前', tagClass: 'prep' },
-    { week: -2, text: '确认联系方式', desc: '医院电话、家人电话、出租车/120 备选', tag: ' 重要', tagClass: 'urgent' },
+    // ── 孕 34 周（week -6）──
+    { week: -6, text: '完成待产包（宝宝篇+证件篇）', desc: 'NB 尿不湿 1 包、奶粉 1 小罐、奶瓶 2 个、证件原件', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -6, text: '确定陪产人并沟通分工', desc: '确定谁陪产，提前告诉他每个阶段该做什么', tag: ' 知识学习', tagClass: 'mom' },
+    { week: -6, text: '学习拉玛泽呼吸法', desc: '每天练习 10-15 分钟，产时用呼吸法减轻疼痛', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -6, text: '填写分娩计划书', desc: '和医生沟通，写下分娩偏好（疼痛管理、陪产、脐带血等）', tag: ' 医疗事项', tagClass: 'doc' },
 
-    { week: -1, text: '每天数胎动，观察产兆', desc: '注意宫缩频率、破水、见红等产兆', tag: ' 重要', tagClass: 'urgent' },
-    { week: -1, text: '放松心情，适当运动', desc: '散步、拉伸，保持体力', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -1, text: '准备好产后恢复用品', desc: '收腹带、哺乳枕、防溢乳垫', tag: ' 妈妈', tagClass: 'mom' },
-    { week: -1, text: '和家人确认分工', desc: '谁负责送医、谁负责照顾、谁负责办手续', tag: ' 产前', tagClass: 'prep' },
+    // ── 孕 35 周（week -5）──
+    { week: -5, text: '安装婴儿安全座椅', desc: '提前安装在后排，去消防站或维修店检查是否牢固', tag: ' 物品准备', tagClass: 'baby' },
+    { week: -5, text: '准备新生儿回家用品', desc: '婴儿指甲剪、棉柔巾、湿巾、隔尿垫、体温计', tag: ' 物品准备', tagClass: 'baby' },
+    { week: -5, text: '了解新生儿常见问题', desc: '肠绞痛、湿疹、热疹、红屁屁的预防和应对', tag: ' 知识学习', tagClass: 'skill' },
 
-    { week: 0, text: '随时准备入院', desc: '出现规律宫缩/破水/见红，立即联系医院', tag: ' 重要', tagClass: 'urgent' },
-    { week: 0, text: '带上待产包出发', desc: '检查待产包是否齐全，带上手机充电器', tag: ' 重要', tagClass: 'urgent' },
-    { week: 0, text: '保持镇定，配合医生', desc: '按照分娩计划进行，相信自己', tag: ' 妈妈', tagClass: 'mom' },
+    // ── 孕 36 周（week -4）──
+    { week: -4, text: '开始每周产检', desc: '36 周起每周一次，监测胎心、胎位、羊水量', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: -4, text: '学习产后护理知识', desc: '了解产后 42 天恢复要点：伤口护理、恶露观察、盆底肌', tag: ' 知识学习', tagClass: 'mom' },
+    { week: -4, text: '确定产后照顾方案', desc: '月嫂／月子中心／家人照顾，提前预订并沟通', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -4, text: '买齐新生儿洗护用品', desc: '沐浴露、润肤露、护臀膏、浴盆、水温计、纱布浴巾', tag: ' 物品准备', tagClass: 'baby' },
 
-    // ═══ 产后 ═══
-    { week: 1, text: '产后充分休息', desc: '产后 24 小时尽量卧床，家人多分担', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 1, text: '伤口护理', desc: '顺产侧切/剖腹产刀口，遵医嘱清洁消毒', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 1, text: '学习正确哺乳姿势', desc: '摇篮式/侧卧式，确保宝宝正确衔乳', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 1, text: '记录宝宝第一次排便', desc: '胎便（黑色）应在 24 小时内排出', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 1, text: '测量宝宝体温', desc: '每天早晚各一次，正常 36.5-37.5°C', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 孕 37 周（week -3）──
+    { week: -3, text: '待产包放在门口显眼位置', desc: '随时可能发动，拎包就走，让家人也知道位置', tag: ' 物品准备', tagClass: 'urgent' },
+    { week: -3, text: '规划去医院的最佳路线', desc: '提前踩点，计算高峰/平峰时间，找好停车场', tag: ' 知识学习', tagClass: 'urgent' },
+    { week: -3, text: '学习产兆判断', desc: '了解规律宫缩（5-1-1 法则）、破水、见红的处理方法', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -3, text: '保持手机畅通，家人随时待命', desc: '37 周足月后随时可能发动，确保家人能随时联系到', tag: ' 知识学习', tagClass: 'urgent' },
 
-    { week: 2, text: '监测宝宝黄疸', desc: '观察皮肤和眼白颜色，严重时及时就医', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 2, text: '脐带护理', desc: '保持干燥清洁，用 75% 酒精消毒，注意异常', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 2, text: '观察恶露情况', desc: '颜色从红→粉→白，量逐渐减少，异常及时就医', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 2, text: '宝宝喂养记录', desc: '记录每次喂奶时间、时长、奶量', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 孕 38 周（week -2）──
+    { week: -2, text: '确认医院入院流程和证件', desc: '检查身份证、医保卡、母子健康手册、产检报告是否齐全', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: -2, text: '深入学习母乳喂养知识', desc: '正确衔乳姿势、喂养频率（8-12 次/天）、堵奶预防', tag: ' 技能学习', tagClass: 'skill' },
+    { week: -2, text: '准备家中环境', desc: '打扫卫生，设置宝宝区域，准备待产零食和充电器', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -2, text: '准备紧急联系方式清单', desc: '医院电话、家人电话、出租车/120 备选，放冰箱上', tag: ' 物品准备', tagClass: 'urgent' },
 
-    { week: 3, text: '预约产后 42 天复查', desc: '妈妈和宝宝都需要复查', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 3, text: '宝宝疫苗接种（乙肝第二针）', desc: '出生后 1 个月接种乙肝疫苗第二针', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 3, text: '妈妈心理状态自评', desc: '关注产后情绪，必要时做 EPDS 自评量表', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 3, text: '宝宝拍嗝技巧', desc: '每次喂奶后拍嗝 10-15 分钟，防止吐奶', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 孕 39 周（week -1）──
+    { week: -1, text: '每天数胎动，观察产兆', desc: '注意宫缩频率、破水、见红，记录在手机备忘录里', tag: ' 技能学习', tagClass: 'urgent' },
+    { week: -1, text: '放松心情，适当运动', desc: '散步 20 分钟/天，听音乐，保持体力', tag: ' 知识学习', tagClass: 'mom' },
+    { week: -1, text: '准备好产后恢复用品', desc: '收腹带、哺乳枕、防溢乳垫、冷敷贴、私处冲洗器', tag: ' 物品准备', tagClass: 'prep' },
+    { week: -1, text: '和家人确认最终分工', desc: '谁负责送医、谁负责办手续、谁负责照顾、谁管做饭', tag: ' 知识学习', tagClass: 'mom' },
 
-    { week: 4, text: '满月体检', desc: '测量体重、身高、头围，评估发育情况', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 4, text: '宝宝生长曲线记录', desc: '记录体重、身高数据，绘制生长曲线', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 4, text: '产后恢复评估', desc: '检查子宫恢复情况、伤口愈合情况', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 4, text: '肠绞痛预防和缓解', desc: '排气操、飞机抱、顺时针揉肚子', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 预产期（week 0）──
+    { week: 0, text: '出现产兆立即联系医院', desc: '规律宫缩（5 分钟一次）/ 破水（平躺抬臀）/ 见红', tag: ' 医疗事项', tagClass: 'urgent' },
+    { week: 0, text: '带上待产包出发去医院', desc: '检查待产包和证件是否齐全，带上手机和充电器', tag: ' 物品准备', tagClass: 'urgent' },
+    { week: 0, text: '保持镇定，配合医生', desc: '按照分娩计划进行，用拉玛泽呼吸法缓解疼痛', tag: ' 技能学习', tagClass: 'mom' },
 
-    { week: 6, text: '产后 42 天复查', desc: '妈妈：盆底肌、子宫恢复。宝宝：全面体检', tag: ' 重要', tagClass: 'urgent' },
-    { week: 6, text: '宝宝抬头训练', desc: '每天俯卧 2-3 次，每次 1-2 分钟，锻炼颈部', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 6, text: '妈妈盆底肌康复', desc: '凯格尔运动，每天 3 组，每组 10 次', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 6, text: '宝宝疫苗（五联/肺炎）', desc: '根据社区医院安排接种', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 产后第 1 周（week 1）──
+    { week: 1, text: '产后充分休息', desc: '产后 24 小时尽量卧床，让家人多分担，不要久站', tag: ' 知识学习', tagClass: 'mom' },
+    { week: 1, text: '伤口护理（顺产/剖腹产）', desc: '顺产：温水清洗 + 私处冲洗器。剖腹产：保持干燥，观察红肿', tag: ' 技能学习', tagClass: 'mom' },
+    { week: 1, text: '学习正确哺乳姿势', desc: '摇篮式／侧卧式，确保宝宝衔乳正确（含住大部分乳晕）', tag: ' 技能学习', tagClass: 'skill' },
+    { week: 1, text: '记录宝宝第一次排便排尿', desc: '胎便（黑色）应在 24 小时内排出，记录时间和性状', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 1, text: '测量宝宝体温', desc: '每天早晚各一次，正常 36.5-37.5°C，异常及时告知护士', tag: ' 技能学习', tagClass: 'baby' },
 
-    { week: 8, text: '宝宝睡眠规律培养', desc: '建立白天小睡和夜间睡眠的区分', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 8, text: '妈妈逐步恢复运动', desc: '产后瑜伽、散步，避免剧烈运动', tag: ' 妈妈', tagClass: 'mom' },
-    { week: 8, text: '宝宝互动游戏', desc: '黑白卡追视、摇铃、和宝宝说话', tag: ' 宝宝', tagClass: 'baby' },
+    // ── 产后第 2 周（week 2）──
+    { week: 2, text: '监测宝宝黄疸', desc: '观察皮肤和眼白颜色，黄疸严重时及时就医测黄疸值', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 2, text: '脐带护理', desc: '用 75% 酒精或碘伏消毒脐带根部，保持干燥，1-2 周脱落', tag: ' 技能学习', tagClass: 'skill' },
+    { week: 2, text: '观察妈妈恶露情况', desc: '颜色从红→粉→白，量逐渐减少，有臭味或量突增需就医', tag: ' 医疗事项', tagClass: 'mom' },
+    { week: 2, text: '开始记录宝宝喂养和排泄', desc: '记录每次喂奶时间/时长/奶量、尿布次数/颜色/性状', tag: ' 技能学习', tagClass: 'baby' },
 
-    { week: 12, text: '三个月体检', desc: '全面评估发育情况：抬头、追视、社交反应', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 12, text: '宝宝疫苗接种', desc: '五联/百白破等疫苗第二针', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 12, text: '宝宝睡眠倒退应对', desc: '3 个月左右可能出现睡眠倒退，提前了解', tag: ' 宝宝', tagClass: 'baby' },
-    { week: 12, text: '妈妈回归职场准备', desc: '如需要，提前规划背奶方案和育儿安排', tag: ' 妈妈', tagClass: 'mom' },
+    // ── 产后第 3 周（week 3）──
+    { week: 3, text: '预约产后 42 天复查', desc: '妈妈：盆底肌、子宫恢复。宝宝：全面体检。提前预约', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: 3, text: '宝宝接种乙肝疫苗第二针', desc: '出生后 1 个月接种，带上疫苗本去社区医院', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 3, text: '妈妈做心理状态自评', desc: '关注产后情绪，用 EPDS 量表自测，低落超 2 周寻求帮助', tag: ' 知识学习', tagClass: 'mom' },
+    { week: 3, text: '学习拍嗝和防吐奶技巧', desc: '每次喂奶后竖抱拍嗝 10-15 分钟，侧卧睡防吐奶窒息', tag: ' 技能学习', tagClass: 'skill' },
+
+    // ── 产后第 4 周（week 4）──
+    { week: 4, text: '满月体检', desc: '测量体重、身高、头围，评估发育情况，带上疫苗本', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 4, text: '开始记录宝宝生长曲线', desc: '每月记录体重、身高数据，绘制生长曲线，关注趋势', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 4, text: '产后恢复评估', desc: '检查子宫恢复情况、伤口愈合情况，恶露是否干净', tag: ' 医疗事项', tagClass: 'mom' },
+    { week: 4, text: '学习肠绞痛缓解方法', desc: '排气操、飞机抱、顺时针揉肚子，了解肠绞痛的应对方法', tag: ' 技能学习', tagClass: 'skill' },
+
+    // ── 产后第 5 周（week 5）──
+    { week: 5, text: '准备 42 天复查资料', desc: '整理产检报告、出院小结、宝宝出生证明等材料', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: 5, text: '开始做凯格尔运动', desc: '每天 3 组，每组 10 次，收缩盆底肌 5 秒后放松', tag: ' 技能学习', tagClass: 'mom' },
+    { week: 5, text: '观察宝宝发育里程碑', desc: '宝宝开始能短暂抬头、追视黑白卡、对声音有反应', tag: ' 知识学习', tagClass: 'baby' },
+
+    // ── 产后第 6 周（week 6）──
+    { week: 6, text: '产后 42 天复查（妈妈+宝宝）', desc: '妈妈：盆底肌评估、子宫恢复、伤口检查。宝宝：全面体检', tag: ' 医疗事项', tagClass: 'urgent' },
+    { week: 6, text: '宝宝抬头训练', desc: '每天俯卧 2-3 次，每次 1-2 分钟，锻炼颈部肌肉', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 6, text: '宝宝接种疫苗（五联/肺炎）', desc: '根据社区医院安排接种五联或肺炎疫苗第一针', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 6, text: '妈妈逐步恢复温和运动', desc: '散步、产后瑜伽，避免剧烈运动，盆底肌未恢复前不跑步', tag: ' 技能学习', tagClass: 'mom' },
+
+    // ── 产后第 7 周（week 7）──
+    { week: 7, text: '和宝宝互动游戏', desc: '黑白卡追视、摇铃引导、和宝宝说话唱歌', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 7, text: '了解宝宝睡眠规律', desc: '新生儿睡眠 16-18 小时/天，开始区分白天和夜晚', tag: ' 知识学习', tagClass: 'baby' },
+    { week: 7, text: '关注妈妈营养补充', desc: '哺乳期继续补钙和维生素 D，保证奶水质量', tag: ' 知识学习', tagClass: 'mom' },
+
+    // ── 产后第 8 周（week 8）──
+    { week: 8, text: '宝宝睡眠规律培养', desc: '建立"吃-玩-睡"循环，区分白天小睡和夜间长睡', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 8, text: '妈妈盆底肌康复评估', desc: '评估盆底肌恢复情况，必要时做康复治疗', tag: ' 医疗事项', tagClass: 'mom' },
+    { week: 8, text: '准备宝宝 2 月龄用品', desc: '换 S 码尿不湿、买 59 码衣服、准备牙胶', tag: ' 物品准备', tagClass: 'baby' },
+
+    // ── 产后第 9 周（week 9）──
+    { week: 9, text: '宝宝疫苗第二针', desc: '五联/百白破疫苗第二针，按时接种', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 9, text: '学习婴儿抚触手法', desc: '每天洗澡后做抚触，促进发育和亲子关系', tag: ' 技能学习', tagClass: 'skill' },
+    { week: 9, text: '关注宝宝情绪表达', desc: '宝宝开始发出不同的哭声表达需求，学会分辨', tag: ' 知识学习', tagClass: 'baby' },
+
+    // ── 产后第 10 周（week 10）──
+    { week: 10, text: '宝宝抓握能力训练', desc: '给宝宝摇铃或软胶玩具，练习抓握和手眼协调', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 10, text: '妈妈身材恢复', desc: '腹直肌分离自测，如有分离做腹式呼吸修复', tag: ' 知识学习', tagClass: 'mom' },
+    { week: 10, text: '了解宝宝厌奶期', desc: '3 个月左右可能出现厌奶期，了解应对方法，不强迫喂奶', tag: ' 知识学习', tagClass: 'baby' },
+
+    // ── 产后第 11 周（week 11）──
+    { week: 11, text: '准备宝宝 3 月龄体检', desc: '提前预约三个月体检，整理好问题和观察记录', tag: ' 医疗事项', tagClass: 'doc' },
+    { week: 11, text: '了解睡眠倒退期', desc: '3-4 个月可能出现睡眠倒退，提前了解不必焦虑', tag: ' 知识学习', tagClass: 'baby' },
+    { week: 11, text: '妈妈回归职场准备', desc: '如需背奶，提前准备吸奶器和储奶袋，规划育儿安排', tag: ' 物品准备', tagClass: 'mom' },
+
+    // ── 产后第 12 周（week 12）──
+    { week: 12, text: '三个月体检（全面评估）', desc: '评估抬头、追视、社交反应、体重身高头围', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 12, text: '宝宝疫苗第三针', desc: '五联/百白破等疫苗第三针', tag: ' 医疗事项', tagClass: 'baby' },
+    { week: 12, text: '宝宝翻身准备', desc: '帮助宝宝练习翻身，多趴着玩，增强核心力量', tag: ' 技能学习', tagClass: 'baby' },
+    { week: 12, text: '回顾产后恢复情况', desc: '总结 3 个月恢复情况，如有问题咨询医生', tag: ' 知识学习', tagClass: 'mom' },
   ];
 
   // ─── DOM refs ───
@@ -326,6 +373,7 @@
   const stageName = document.getElementById('stage-name');
   const stageDetail = document.getElementById('stage-detail');
   const stageProgress = document.getElementById('stage-progress');
+  const overallProgress = document.getElementById('overall-progress');
   const taskSection = document.getElementById('task-section');
   const taskContainer = document.getElementById('task-container');
   const emptySection = document.getElementById('empty-section');
@@ -333,89 +381,87 @@
   // ─── 工具函数 ───
   function weeksBetween(d1, d2) {
     const diff = d2.getTime() - d1.getTime();
-    return Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
+    return Math.round(diff / (7 * 24 * 60 * 60 * 1000));
   }
 
   function formatDate(date) {
     return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
   }
 
-  // ─── 核心逻辑 ───
+  // ─── 获取当前阶段信息 ───
   function getStageInfo(dueDateStr) {
     const today = new Date();
     today.setHours(0,0,0,0);
     const dueDate = new Date(dueDateStr);
     dueDate.setHours(0,0,0,0);
 
-    const weeksToDue = weeksBetween(today, dueDate); // 正数=还有X周到预产期
+    const weeksToDue = weeksBetween(today, dueDate);
 
     if (weeksToDue > 12) {
-      // 孕早期/中期，还没到使用阶段
-      return { stage: 'early', label: '孕早期/中期', detail: `距离预产期还有 ${weeksToDue} 周，建议 ${weeksToDue - 12} 周后再来使用`, weeks: [] };
+      return {
+        stage: 'early',
+        label: ' 孕早期/中期',
+        detail: `距离预产期还有 ${weeksToDue} 周，还不到使用时间`,
+        progress: '',
+        currentWeek: null,
+        allWeeks: []
+      };
     } else if (weeksToDue >= 0) {
-      // 孕晚期：-12 到 0 周
-      const gw = 40 - weeksToDue; // 孕周
-      const startWeek = Math.max(-12, -weeksToDue - 2); // 往前多展示2周
-      const endWeek = Math.min(0, -weeksToDue + 4); // 往后展示4周
+      // 孕晚期：显示所有周 -12 到 0
+      const gw = 40 - weeksToDue;
+      const allWeeks = [];
+      for (let w = -12; w <= 0; w++) allWeeks.push(w);
       return {
         stage: 'prenatal',
         label: ` 孕晚期 · 孕 ${gw} 周`,
         detail: `距离预产期还有 ${weeksToDue} 周`,
-        progress: `已孕 ${gw} 周 / 40 周`,
-        startWeek, endWeek, currentWeek: -weeksToDue
+        progress: `孕 ${gw} 周 / 40 周`,
+        currentWeek: -weeksToDue,
+        allWeeks
       };
     } else {
-      // 产后
-      const weeksAfter = Math.abs(weeksToDue); // 产后第几周
-      const startWeek = Math.max(1, weeksAfter - 2);
-      const endWeek = Math.min(12, weeksAfter + 4);
+      // 产后：显示所有周 1 到 12
+      const weeksAfter = Math.abs(weeksToDue);
+      const allWeeks = [];
+      for (let w = 1; w <= 12; w++) allWeeks.push(w);
       return {
         stage: 'postpartum',
         label: ` 产后 · 第 ${weeksAfter} 周`,
         detail: `宝宝出生 ${weeksAfter} 周了`,
-        progress: `产后第 ${weeksAfter} 周 / 12 周`,
-        startWeek, endWeek, currentWeek: weeksAfter
+        progress: `产后第 ${Math.min(weeksAfter, 12)} 周 / 12 周`,
+        currentWeek: weeksAfter,
+        allWeeks
       };
     }
   }
 
-  function getTasksForWeeks(startWeek, endWeek, currentWeek) {
-    // 筛选出在范围内的任务
-    let tasks = TASK_DB.filter(t => t.week >= startWeek && t.week <= endWeek);
-    // 按 week 排序
-    tasks.sort((a, b) => a.week - b.week);
-    // 按 week 分组
-    const groups = {};
-    tasks.forEach(t => {
-      if (!groups[t.week]) groups[t.week] = [];
-      groups[t.week].push(t);
-    });
-    return { groups, taskCount: tasks.length };
-  }
-
   function weekLabel(week) {
-    if (week < 0) {
-      const gw = 40 + week; // week=-12 => 28周
-      return `孕 ${gw} 周`;
-    } else if (week === 0) {
-      return ' 预产期';
-    } else {
-      return `产后第 ${week} 周`;
-    }
+    if (week < 0) return `孕 ${40 + week} 周`;
+    if (week === 0) return ' 预产期';
+    return `产后第 ${week} 周`;
   }
 
-  function weekDesc(week, currentWeek) {
-    if (week < currentWeek) return '✅ 已完成，可回顾';
+  function weekStatus(week, currentWeek) {
+    if (currentWeek === null) return '';
+    if (week < currentWeek) return '✅ 已完成区域';
     if (week === currentWeek) return ' 当前阶段';
-    return ' 即将到来，提前准备';
+    return ' 即将到来';
   }
 
+  function isCurrentWeek(week, currentWeek) {
+    return currentWeek !== null && week === currentWeek;
+  }
+
+  // ─── 渲染 ───
   function render() {
     const saved = localStorage.getItem('nestguide_due_date');
     if (!saved) {
       stageBanner.style.display = 'none';
+      overallProgress.style.display = 'none';
       taskSection.style.display = 'none';
       emptySection.style.display = 'block';
+      document.querySelector('.empty-state h3').textContent = ' 请设置您的预产期';
+      document.querySelector('.empty-state p').innerHTML = '选择日期后，系统会根据您当前所处的阶段<br>展示从孕 28 周到产后 12 周的完整待办清单';
       return;
     }
 
@@ -429,28 +475,61 @@
     stageProgress.textContent = info.progress || '';
 
     if (info.stage === 'early') {
+      overallProgress.style.display = 'none';
       taskSection.style.display = 'none';
       emptySection.style.display = 'block';
       document.querySelector('.empty-state h3').textContent = ' 还不到使用时间哦';
-      document.querySelector('.empty-state p').textContent = info.detail;
+      document.querySelector('.empty-state p').innerHTML = info.detail;
       return;
     }
 
     emptySection.style.display = 'none';
     taskSection.style.display = 'block';
 
-    const { groups } = getTasksForWeeks(info.startWeek, info.endWeek, info.currentWeek);
-    const weekKeys = Object.keys(groups).map(Number).sort((a,b) => a-b);
+    // 计算统计数据
+    const allVisibleTasks = TASK_DB.filter(t => info.allWeeks.includes(t.week));
+    // 只显示当前周及之前已完成的任务，加上未来所有任务
+    const displayTasks = allVisibleTasks.filter(t => {
+      if (info.currentWeek === null) return true;
+      return t.week <= info.currentWeek;
+    });
+    // 但也要显示未来2周的任务（给用户预览）
+    const previewTasks = allVisibleTasks.filter(t => {
+      if (info.currentWeek === null) return false;
+      return t.week > info.currentWeek && t.week <= info.currentWeek + 2;
+    });
 
+    const visibleTasks = [...displayTasks, ...previewTasks];
+
+    // 统计总任务数（所有可见周）
+    const totalCount = allVisibleTasks.length;
+    let doneCount = 0;
+    allVisibleTasks.forEach(t => {
+      const key = 'task_' + btoa(t.text + '_' + t.week);
+      if (localStorage.getItem(key) === 'true') doneCount++;
+    });
+    const pendingCount = totalCount - doneCount;
+    const rate = totalCount > 0 ? Math.round(doneCount / totalCount * 100) : 0;
+
+    document.getElementById('stat-total').textContent = totalCount;
+    document.getElementById('stat-done').textContent = doneCount;
+    document.getElementById('stat-pending').textContent = pendingCount;
+    document.getElementById('stat-rate').textContent = rate + '%';
+    document.getElementById('stat-weeks').textContent = info.allWeeks.length;
+    overallProgress.style.display = 'block';
+
+    // 按周分组渲染
     let html = '';
-    weekKeys.forEach(week => {
-      const tasks = groups[week];
-      let doneCount = 0;
+    info.allWeeks.forEach(week => {
+      const tasks = allVisibleTasks.filter(t => t.week === week);
+      if (tasks.length === 0) return;
+
+      let doneInWeek = 0;
       let taskHtml = '';
       tasks.forEach(t => {
         const key = 'task_' + btoa(t.text + '_' + t.week);
         const done = localStorage.getItem(key) === 'true';
-        if (done) doneCount++;
+        if (done) doneInWeek++;
         taskHtml += `
           <div class="task-item${done ? ' done' : ''}" data-key="${key}">
             <div class="task-check">${done ? '✓' : ''}</div>
@@ -463,13 +542,33 @@
         `;
       });
 
-      const isCurrent = week === info.currentWeek;
+      const current = isCurrentWeek(week, info.currentWeek);
+      const status = weekStatus(week, info.currentWeek);
+      // 如果当前周还没到，但很近（2周内），显示为"即将到来"
+      // 如果当前周已经过了，显示"已完成区域"
+      // 如果距离当前周超过2周，显示"未来任务"
+      let statusClass = '';
+      let statusText = status;
+      if (info.currentWeek !== null) {
+        if (week < info.currentWeek) {
+          statusText = '✅ 已完成';
+        } else if (week === info.currentWeek) {
+          statusText = ' 当前阶段';
+          statusClass = 'current';
+        } else if (week <= info.currentWeek + 2) {
+          statusText = ' 即将到来';
+        } else {
+          statusText = ' 未来任务';
+        }
+      }
+
       html += `
         <div class="task-group">
           <div class="task-group-header">
-            <span class="week-label">${isCurrent ? '  ' : ''}${weekLabel(week)}</span>
-            <span class="week-sub">${weekDesc(week, info.currentWeek)}</span>
-            <span class="week-progress">${doneCount}/${tasks.length}</span>
+            <span class="week-icon">${current ? '  ' : ''}</span>
+            <span class="week-label">${weekLabel(week)}</span>
+            <span class="week-status ${statusClass}">${statusText}</span>
+            <span class="week-progress">${doneInWeek}/${tasks.length}</span>
           </div>
           <div class="task-card">${taskHtml}</div>
         </div>
@@ -500,19 +599,16 @@
   resetBtn.addEventListener('click', () => {
     if (!confirm('重置将清除所有已勾选的任务，确定吗？')) return;
     localStorage.removeItem('nestguide_due_date');
-    // 清除所有任务勾选状态
     const keys = Object.keys(localStorage);
     keys.forEach(k => { if (k.startsWith('task_')) localStorage.removeItem(k); });
     render();
   });
 
   // ─── 初始化 ───
-  // 设置默认日期为预产期（今天 + 12 周，约孕 28 周）
   const defaultDate = new Date();
   defaultDate.setDate(defaultDate.getDate() + 12 * 7);
   dueDateInput.value = formatDate(defaultDate);
 
-  // 自动加载已保存的日期
   if (localStorage.getItem('nestguide_due_date')) {
     render();
   }
